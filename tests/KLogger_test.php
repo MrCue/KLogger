@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/../src/Klogger.php');
+require_once(dirname(__FILE__) . '/../src/KLogger.php');
 
 class KLogger_test extends PHPUnit_Framework_TestCase
 {
