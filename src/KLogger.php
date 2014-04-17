@@ -183,19 +183,22 @@ class KLogger
 
         if (empty($database) && empty($table)) {
 
-            //Directory?
-            if ($logDirectory === false) {
-                $logDirectory = sys_get_temp_dir();
+            if($logDirectory != 'php://stdout') {
+                //Directory?
+                if ($logDirectory === false) {
+                    $logDirectory = sys_get_temp_dir();
+                }
+
+                //Did they include a filename?
+                if (is_null($filename)) {
+                    $filename = 'KLogger_' . date('Y-m-d G-i-s') . '.log';
+                }
+
+                //Get the full path to the new file
+                $logFile = $logDirectory . DIRECTORY_SEPARATOR . $filename;
+            } else {
+                $logFile = 'php://stdout';
             }
-
-            //Did they include a filename?
-            if (is_null($filename)) {
-                $filename = 'KLogger_' . date('Y-m-d G-i-s') . '.log';
-            }
-
-            //Get the full path to the new file
-            $logFile = $logDirectory . DIRECTORY_SEPARATOR . $filename;
-
         } else {
             $logFile = $database . ':' . $table;
         }
